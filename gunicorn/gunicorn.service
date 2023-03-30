@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+[Service]
+User=ec2-user
+Group=www-data
+WorkingDirectory=/home/ec2-user/blogproject
+ExecStart=/home/ec2-user/env/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/ec2-user/blogprojectdr/blog/blog.sock blog.wsgi:application
+
+       
+[Install]
+WantedBy=multi-user.target
